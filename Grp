@@ -1,0 +1,112 @@
+// create chart
+var chart = AmCharts.makeChart("chartdiv", {
+  // ... chart configuration ...
+  "graphs": [{
+    "id": "g1",
+    "title": "Graph Title",
+    "valueField": "value",
+    "balloonText": "[[title]]<br><b>[[value]]</b>",
+    "type": "column",
+    "fillAlphas": 0.8,
+    "lineAlpha": 0.2,
+    "clickGraphItem": function(event) {
+      // get the image url from the event data
+      var imageUrl = event.item.dataContext.imageUrl;
+      // set the image url to the src attribute of the img element
+      document.getElementById("image").src = imageUrl;
+      // show the image container div
+      document.getElementById("image-container").style.display = "block";
+    }
+  }]
+});
+
+
+// Set up the chart
+var chart = AmCharts.makeChart("chartdiv", {
+  "type": "pie",
+  "dataProvider": [{
+    "title": "Apple",
+    "value": 4852
+  }, {
+    "title": "Microsoft",
+    "value": 3621
+  }, {
+    "title": "Google",
+    "value": 2536
+  }],
+  "titleField": "title",
+  "valueField": "value",
+  "labelRadius": 5,
+
+  "radius": "42%",
+  "innerRadius": "60%",
+  "labelText": "[[title]]",
+  "export": {
+    "enabled": true
+  }
+});
+
+// Set up the pop-up window
+chart.addListener("clickGraphItem", function(event) {
+  var title = event.item.dataContext.title;
+  var value = event.item.dataContext.value;
+  window.open("popup.php?title=" + title + "&value=" + value, "Pop-Up", "width=500,height=500");
+});
+
+
+<?php
+// Connect to the database
+$conn = mysqli_connect("localhost", "username", "password", "database");
+
+// Retrieve the data
+$result = mysqli_query($conn, "SELECT * FROM table WHERE id = " . $_GET['id']);
+
+// Generate the HTML for the pop-up window
+echo "<table>";
+while ($row = mysqli_fetch_assoc($result)) {
+  echo "<tr>";
+  echo "<td>" . $row['field1'] . "</td>";
+  echo "<td>" . $row['field2'] . "</td>";
+  echo "</tr>";
+}
+echo "</table>";
+
+// Close the connection
+mysqli_close($conn);
+?>
+
+
+<?php
+// Connect to the database
+$conn = mysqli_connect("localhost", "username", "password", "database");
+
+// Retrieve the data
+$result = mysqli_query($conn, "SELECT * FROM table WHERE id = " . $_GET['id']);
+
+// Generate the HTML for the pop-up window
+echo "<table>";
+while ($row = mysqli_fetch_assoc($result)) {
+  echo "<tr>";
+  echo "<td>" . $row['field1'] . "</td>";
+  echo "<td>" . $row['field2'] . "</td>";
+  echo "</tr>";
+}
+echo "</table>";
+echo "<button onclick='closeWindow()'>Close</button>";
+
+// Close the connection
+mysqli_close($conn);
+?>
+
+<script>
+function closeWindow() {
+  window.close();
+}
+</script>
+
+
+
+
+
+
+
