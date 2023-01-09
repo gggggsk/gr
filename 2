@@ -1,0 +1,123 @@
+<?php
+
+// Connect to the database
+$conn = mysqli_connect('hostname', 'username', 'password', 'database_name');
+
+// Check the connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Execute a SQL query to retrieve the data
+$query = "SELECT * FROM table_name";
+$result = mysqli_query($conn, $query);
+
+// Check the result
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+
+// Create an HTML table to display the data
+$table = '<table><tr><th>Column 1</th><th>Column 2</th></tr>';
+while ($row = mysqli_fetch_assoc($result)) {
+    $table .= '<tr><td>' . $row['column1'] . '</td><td>' . $row['column2'] . '</td></tr>';
+}
+$table .= '</table>';
+
+// Close the connection
+mysqli_close($conn);
+
+?>
+
+<!-- Include the amCharts library -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+
+<!-- Create the amCharts chart -->
+<div id="chartdiv"></div>
+
+<!-- Configure the amCharts chart -->
+<script>
+am4core.ready(function() {
+
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  // Create the chart
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+  // Add data
+  chart.data = [{
+    "x": 1,
+    "y": 10
+  }, {
+    "x": 2,
+    "y": 5
+  }, {
+    "x": 3,
+    "y": 15
+  }];
+
+  // Create axes
+  var xAxis = chart.xAxes.push
+
+//JS
+<!-- Include the amCharts library -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+
+<!-- Create the amCharts chart -->
+<div id="chartdiv"></div>
+
+<!-- Configure the amCharts chart -->
+<script>
+am4core.ready(function() {
+
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  // Create the chart
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+  // Add data
+  chart.data = [{
+    "x": 1,
+    "y": 10
+  }, {
+    "x": 2,
+    "y": 5
+  }, {
+    "x": 3,
+    "y": 15
+  }];
+
+  // Create axes
+  var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+  var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+  // Create the series
+  var series = chart.series.push(new am4charts.LineSeries());
+  series.dataFields.valueX = "x";
+  series.dataFields.valueY = "y";
+
+  // Set the cursor
+  chart.cursor = new am4charts.XYCursor();
+
+  // Set the onclick event of the graph
+  chart.plotContainer.events.on("hit", function(event) {
+
+    // Make an AJAX request to the PHP script
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+
+        // Parse the JSON response
+        var data = JSON.parse(xhr.responseText);
+
+        // Create an HTML table to display the data
+        var table = '<table><tr><th>Column 1</th><th>Column 2</th></tr>';
+        for (var i = 0; i < data.length; i++) {
+          table += '<tr><td>' + data[i].column1 + '</td><td>' + data
+
